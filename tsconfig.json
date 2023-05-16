@@ -4,7 +4,7 @@
   "compilerOptions": {
     "paths": {
       "angular-ngx-autocomplete": [
-        "dist/angular-ngx-autocomplete"
+        "projects/angular-ngx-autocomplete/src/public-api.ts"
       ]
     },
     "baseUrl": "./",
