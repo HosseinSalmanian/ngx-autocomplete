@@ -2,11 +2,11 @@
   cdkOverlayOrigin
   #trigger="cdkOverlayOrigin"
   class="autocomplete-container"
-  dir="rtl"
   #containerDiv
   (mouseenter)="setClearButtonVisibility()"
   (mouseleave)="setClearButtonVisibility()"
-  (focusout)="onContainerBlur()">
+  (focusout)="onContainerBlur()"
+>
   <input
     #inputElement
     class="text-input"
@@ -15,75 +15,89 @@
     [autocomplete]="autocomplete"
     [value]="viewValue"
     placeholder="{{ placeholder || '' }}"
-    tseTextInputEnToFa
     (keydown)="onInputKeyDown($event)"
-    (blur)="onInputBlur()" />
+    (blur)="onInputBlur()"
+  />
   <i
     *ngIf="showClearButton"
     class="clear-button fa fa-remove small-icon red-c"
-    (click)="onClear($event)"></i>
-  <i
-    *ngIf="isLoading"
-    class="clear-button fa fa-rotate small-icon blue-c fa-spin"></i>
+    (click)="onClear($event)"
+  ></i>
+  <i *ngIf="isLoading" class="fa fa-rotate small-icon blue-c fa-spin"></i>
 
   <!-- showSuggestions -->
   <ng-template
     cdkConnectedOverlay
     [cdkConnectedOverlayOrigin]="trigger"
-    [cdkConnectedOverlayOpen]="showSuggestions">
+    [cdkConnectedOverlayOpen]="showSuggestions"
+  >
     <div
-      class="suggestions white-bg border z-2 ov-auto radius-5"
-      [ngStyle]="overlayStyles">
+      class="suggestions"
+      [ngStyle]="overlayStyles"
+      [style.max-height.px]="suggestionContainerHeight"
+    >
       <ng-container
         *ngIf="items && !isLoading"
         [ngTemplateOutlet]="
           items.length ? suggestionsTemplate : noSuggestionTemplate
-        ">
+        "
+      >
       </ng-container>
+
+      <!--template for loaded Items-->
       <ng-template #suggestionsTemplate>
+        <!--header template-->
         <ng-container
           *ngIf="suggestionHeader?.templateRef"
-          [ngTemplateOutlet]="suggestionHeader.templateRef"></ng-container>
+          [ngTemplateOutlet]="suggestionHeader.templateRef"
+        ></ng-container>
+
+        <!--body template-->
         <div
-          class="suggestion-items-container"
-          [style.max-height.px]="suggestionContainerHeight">
-          <div
-            [ngClass]="suggestionItemClass"
-            class="suggestion-item"
-            *ngFor="let suggestion of items; let i = index; trackBy: trackById"
-            [class.highlighted]="highlightIndex === i"
-            (mouseenter)="this.highlightedIndex = i"
-            (mouseleave)="this.highlightedIndex = -1"
-            (mousedown)="onSuggestionClick(i, $event)">
-            <ng-container
-              [ngTemplateOutlet]="
-                suggestionContent?.templateRef ||
-                defaultSuggestionContentTemplate
-              "
-              [ngTemplateOutletContext]="{
-                $implicit: suggestion
-              }"></ng-container>
-            <ng-template #defaultSuggestionContentTemplate>
-              <p class="suggestion-value pd-5 fw-300 nowrap">
-                {{ suggestions[i] }}
-              </p>
-            </ng-template>
-          </div>
+          [ngClass]="suggestionItemClass"
+          class="suggestion-item"
+          *ngFor="let suggestion of items; let i = index; trackBy: trackById"
+          [class.highlighted]="highlightIndex === i"
+          (mouseenter)="this.highlightedIndex = i"
+          (mouseleave)="this.highlightedIndex = -1"
+          (mousedown)="onSuggestionClick(i, $event)"
+        >
+          <ng-container
+            [ngTemplateOutlet]="
+              suggestionContent?.templateRef || defaultSuggestionContentTemplate
+            "
+            [ngTemplateOutletContext]="{
+              $implicit: suggestion
+            }"
+          ></ng-container>
+
+          <!--template to show default text-->
+          <ng-template #defaultSuggestionContentTemplate>
+            <p class="suggestion-value">
+              {{ suggestions[i] }}
+            </p>
+          </ng-template>
         </div>
+
+        <!--footer template-->
         <ng-container
           *ngIf="suggestionFooter?.templateRef"
-          [ngTemplateOutlet]="suggestionFooter.templateRef">
+          [ngTemplateOutlet]="suggestionFooter.templateRef"
+        >
         </ng-container>
       </ng-template>
+
+      <!--template for empty search result-->
       <ng-template #noSuggestionTemplate>
         <ng-container
           *ngIf="term.length >= minimumCharacterForSearch"
           [ngTemplateOutlet]="
             noSuggestionDirective?.templateRef || defaultNoSuggestionTemplate
-          ">
+          "
+        >
         </ng-container>
         <ng-template #defaultNoSuggestionTemplate>
-          <p class="pd-5">{{ noSuggestionText }}</p>
+          <p>{{ noSuggestionText }}</p>
         </ng-template>
       </ng-template>
     </div>

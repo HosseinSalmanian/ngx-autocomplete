@@ -1,7 +1,7 @@
 .autocomplete-container {
   position: relative;
 
-  input {
+  .text-input {
     width: 100%;
   }
 
@@ -15,64 +15,22 @@
 }
 
 .suggestions {
-  top: 100%;
   box-shadow: 0px 2px 5px 0 rgba(0 0 0 / 0.26);
-  max-height: 30vh;
   overflow: auto;
+  .suggestion-item {
+    padding: 5px;
 
-  .suggestion-items-container {
-    overflow-y: auto;
-    display: table-row-group;
-
-    .suggestion-item {
-      display: contents;
-
-      .suggestion-value {
-        min-width: 200px;
-
-        &:hover {
-          background-color: #fffad7 !important;
-        }
-      }
-
-      &:nth-child(even) .suggestion-value {
-        background-color: #f8f9fc;
-      }
-    }
-  }
-  ::ng-deep {
-    .header {
-      color: #5d6e88;
-
-      div {
-        border-bottom: 2px solid #5d6e88;
-        font-weight: 500 !important;
-        position: sticky;
-        top: 0;
-        background: #fff;
-      }
+    &:hover {
+      background-color: #fffad7 !important;
     }
 
-    .suggestion-item {
-      &:nth-child(even) .item {
-        background-color: #f8f9fc;
-      }
-
-      &.highlighted .item {
-        background-color: #fffad7;
-      }
+    .suggestion-value {
+      margin: 0;
+      background: transparent;
     }
 
-    .header,
-    .item {
-      display: table-row;
-
-      div {
-        padding: 5px;
-        white-space: nowrap;
-        display: table-cell;
-        font-weight: 300;
-      }
+    &:nth-child(even) {
+      background-color: #f8f9fc;
     }
   }
 }
