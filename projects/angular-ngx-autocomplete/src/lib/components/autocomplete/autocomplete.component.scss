@@ -8,11 +8,14 @@
   }
 
   .clear-button {
+    display: flex;
     position: absolute;
-    left: 0;
-    top: 0;
-    margin: 10px 10px;
-    vertical-align: inherit;
+    right: 0;
+    margin: 0.2em;
+    font-size: 1em;
+    width: 1em;
+    fill: red;
+    cursor: pointer;
   }
 }
 
