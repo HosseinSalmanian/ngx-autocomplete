@@ -1,5 +1,7 @@
 .autocomplete-container {
   position: relative;
+  display: flex;
+  align-items: center;
 
   .text-input {
     width: 100%;
@@ -32,5 +34,24 @@
     &:nth-child(even) {
       background-color: #f8f9fc;
     }
+  }
+}
+
+.refresh-icon {
+  display: flex;
+  position: absolute;
+  right: 0;
+  margin: 0.2em;
+  font-size: 1em;
+
+  animation: rotate-360 2s infinite linear;
+}
+
+@keyframes rotate-360 {
+  from {
+    transform: rotate(90deg);
+  }
+  to {
+    transform: rotate(450deg);
   }
 }
