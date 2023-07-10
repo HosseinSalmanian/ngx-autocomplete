@@ -19,7 +19,7 @@ const meta: Meta<Autocomplete> = {
       ...args,
       searchMethod: (term: Observable<string>) => {
         return term.pipe(
-          switchMap((term) => {
+          switchMap(term => {
             return of(PERSON_LIST);
           })
         );
@@ -36,23 +36,23 @@ export const Demo: Story = {
     viewKey: 'email',
     minimumCharacterForSearch: 2,
 
-    debounceTime:  500,
-  
+    debounceTime: 500,
+
     suggestionItemClass: 'custom-class',
-  
-    suggestionContainerHeight: 150, 
+
+    suggestionContainerHeight: 150,
     // suggestionKey!: keyof T;
     // suggestionMethod!: (item?: T) => string;
     // idKey: keyof T = 'id' as keyof T;
     // viewKey!: keyof T;
     // viewMethod!: (selection?: T) => string;
-    placeholder:'type to search',
+    placeholder: 'type to search',
     autocomplete: 'off',
-  
-    noSuggestionText:'no item found.',
-  
+
+    noSuggestionText: 'no item found.',
+
     clearButton: true,
-  
-    fitOverlayWidth:  false
+
+    fitOverlayWidth: false,
   },
 };
