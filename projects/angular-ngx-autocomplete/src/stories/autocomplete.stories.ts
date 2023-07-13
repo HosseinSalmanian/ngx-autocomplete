@@ -3,7 +3,7 @@ import {
   AutocompleteComponent,
   AutocompleteModule,
 } from 'angular-ngx-autocomplete';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, delay, of, switchMap } from 'rxjs';
 import PERSON_LIST from './data/person-list';
 import { Person } from './models/person.model';
 
@@ -20,7 +20,11 @@ const meta: Meta<Autocomplete> = {
       searchMethod: (term: Observable<string>) => {
         return term.pipe(
           switchMap((term) => {
-            return of(PERSON_LIST);
+            return of(
+              PERSON_LIST.filter(
+                (t) => term.trim() === '' || t.email.indexOf(term) > -1 ||  t.name.indexOf(term) > -1
+              )
+            ).pipe(delay(1000));
           })
         );
       },
@@ -34,25 +38,25 @@ type Story = StoryObj<Autocomplete>;
 export const Demo: Story = {
   args: {
     viewKey: 'email',
-    minimumCharacterForSearch: 2,
+    minimumCharacterForSearch: 0,
 
-    debounceTime:  500,
-  
+    debounceTime: 500,
+
     suggestionItemClass: 'custom-class',
-  
-    suggestionContainerHeight: 150, 
+
+    suggestionContainerHeight: 150,
     // suggestionKey!: keyof T;
     // suggestionMethod!: (item?: T) => string;
     // idKey: keyof T = 'id' as keyof T;
     // viewKey!: keyof T;
     // viewMethod!: (selection?: T) => string;
-    placeholder:'type to search',
+    placeholder: 'type to search',
     autocomplete: 'off',
-  
-    noSuggestionText:'no item found.',
-  
+
+    noSuggestionText: 'no item found.',
+
     clearButton: true,
-  
-    fitOverlayWidth:  false
+
+    fitOverlayWidth: false,
   },
 };
