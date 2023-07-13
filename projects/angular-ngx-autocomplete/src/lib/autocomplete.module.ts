@@ -17,7 +17,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
     SuggestionFooterDirective,
     SuggestionContentDirective,
   ],
-  imports: [CommonModule,OverlayModule],
+  imports: [CommonModule, OverlayModule],
   exports: [
     AutocompleteComponent,
     SuggestionHeaderDirective,
