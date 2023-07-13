@@ -19,10 +19,13 @@ const meta: Meta<Autocomplete> = {
       ...args,
       searchMethod: (term: Observable<string>) => {
         return term.pipe(
-          switchMap((term) => {
+          switchMap(term => {
             return of(
               PERSON_LIST.filter(
-                (t) => term.trim() === '' || t.email.indexOf(term) > -1 ||  t.name.indexOf(term) > -1
+                t =>
+                  term.trim() === '' ||
+                  t.email.indexOf(term) > -1 ||
+                  t.name.indexOf(term) > -1
               )
             ).pipe(delay(1000));
           })
