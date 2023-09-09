@@ -9,6 +9,7 @@ import {
   OnDestroy,
   Output,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { fromEvent, iif, merge, of, OperatorFunction, Subject } from 'rxjs';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -44,6 +45,7 @@ type TSuggestion<T> = string | number | T | null;
       multi: true,
     },
   ],
+  encapsulation:ViewEncapsulation.None
 })
 export class AutocompleteComponent<T>
   implements ControlValueAccessor, AfterViewInit, OnDestroy
