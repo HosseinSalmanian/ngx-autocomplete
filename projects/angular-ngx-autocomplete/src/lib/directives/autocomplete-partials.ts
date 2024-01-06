@@ -1,28 +1,28 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-  selector: '[tseSuggestionHeader]',
+  selector: '[ngxSuggestionHeader]',
 })
 export class SuggestionHeaderDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }
 
 @Directive({
-  selector: '[tseSuggestionContent]',
+  selector: '[ngxSuggestionContent]',
 })
 export class SuggestionContentDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }
 
 @Directive({
-  selector: '[tseSuggestionFooter]',
+  selector: '[ngxSuggestionFooter]',
 })
 export class SuggestionFooterDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }
 
 @Directive({
-  selector: '[tseNoSuggestion]',
+  selector: '[ngxNoSuggestion]',
 })
 export class NoSuggestionDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
