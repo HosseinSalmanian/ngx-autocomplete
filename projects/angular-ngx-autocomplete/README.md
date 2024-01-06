@@ -1,25 +1,255 @@
-# AngularNgxAutocomplete
+# Ngx Autocomplete
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
+An easy to use and flexible Autocomplete angular component.
 
-## Code scaffolding
+## Usage
 
-Run `ng generate component component-name --project angular-ngx-autocomplete` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project angular-ngx-autocomplete`.
+Install npm module.
 
-> Note: Don't forget to add `--project angular-ngx-autocomplete` or else it will be added to the default project in your `angular.json` file.
+```bash
+npm i ngx-autocomplete
+```
+Now import the module in your angular module, e.g. ``app.module.ts``:
 
-## Build
+```ts
+import { AutocompleteModule } from 'ngx-autocomplete';
 
-Run `ng build angular-ngx-autocomplete` to build the project. The build artifacts will be stored in the `dist/` directory.
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AutocompleteModule
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
+In your template file, add the ``ng-indigit`` attribute to an HTML text input, e.g.:
 
-## Publishing
+```html
+<ngx-autocomplete [searchMethod]="searchMethod" viewKey="email"></ngx-autocomplete>
+```
 
-After building your library with `ng build angular-ngx-autocomplete`, go to the dist folder `cd dist/angular-ngx-autocomplete` and run `npm publish`.
+## Configuration
 
-## Running unit tests
+You can pass the following attributes values of supported types for further customizations:
 
-Run `ng test angular-ngx-autocomplete` to execute the unit tests via [Karma](https://karma-runner.github.io).
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Supported Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+  
+  <tr>
+    <td>
+      <code>minimumCharacterForSearch</code>
+    </td>
+    <td>
+      number
+    </td>
+    <td>
+      0
+    </td>
+    <td style="vertical-align: top;">
+      Minumum character needs to start searching.
+    </td>
+  </tr>
 
-## Further help
+  <tr>
+    <td><code>debounceTime</code></td>
+    <td>number</td>
+    <td>500</td>
+    <td style="vertical-align: top;">
+          Miliseconds after user finished typing search term 
+      for triggering search method
+        </td>
+  </tr>
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+  <tr>
+    <td>
+      <code>suggestionItemClass</code>
+    </td>
+    <td>string</td>
+    <td>-</td>
+    <td style="vertical-align: top;">
+      Custom CSS class applies tp every search result item.
+    </td>
+ </tr>
+
+  <tr>
+    <td>
+      <code>suggestionContainerHeight</code>
+    </td>
+    <td>number</td>
+    <td>150</td>
+    <td style="vertical-align: top;">
+      Search result dropdown height in pixell.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <code>searchMethod</code>
+    </td>
+    <td>
+        OperatorFunction<string, T[]> | null | undefined</td>
+    <td>-</td>
+    <td style="vertical-align: top;">
+      A function wich recoeves search term as an obcervable of string and returns array of search item as result.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <code>suggestionKey</code>
+    </td>
+    <td>string</td>
+    <td>-</td>
+    <td style="vertical-align: top;">
+        Object field for rendering for every search result item in search result drop down.
+        If suggestionMethod was provided, suggestionMethod result uses for rendering item.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <code>suggestionMethod</code>
+    </td>
+    <td>(item?: T) => string</td>
+    <td>-</td>
+    <td style="vertical-align: top;">
+        Object field for rendering for every search result item in search result drop down.
+        If suggestionMethod was provided, suggestionMethod result uses for rendering item.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <code>idKey</code>
+    </td>
+    <td>string</td>
+    <td>id</td>
+    <td style="vertical-align: top;">
+        Item field name uses in track by function for rendering search result items.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <code>viewKey</code>
+    </td>
+    <td>string</td>
+    <td>-</td>
+    <td style="vertical-align: top;">
+        Object field for showing selected item in search input.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <code>viewMethod</code>
+    </td>
+    <td>(selection?: T) => string</td>
+    <td>-</td>
+    <td style="vertical-align: top;">
+        The function that converts an item from the result list to a string to display in the input.
+        It is called when the user selects something in the popup or the model value changes, so the input needs to be updated
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <code>placeholder</code>
+    </td>
+    <td>string</td>
+    <td>-</td>
+    <td style="vertical-align: top;">
+        Search input placeholder attribute value.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <code>noSuggestionText</code>
+    </td>
+    <td>string</td>
+    <td>"no item found."</td>
+    <td style="vertical-align: top;">
+        Text shows when search result is empty.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <code>clearButton</code>
+    </td>
+    <td>boolean</td>
+    <td>true</td>
+    <td style="vertical-align: top;">
+        boolean value to show  button for removing selected suggestion.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <code>forceSuggestion</code>
+    </td>
+    <td>boolean</td>
+    <td>true</td>
+    <td style="vertical-align: top;">
+        If set to false the input value use as selected item.
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <code>suggestionSelect</code>
+    </td>
+    <td>EventEmitter</td>
+    <td>-</td>
+    <td style="vertical-align: top;">
+        The event that fiers after user has selected an item.
+        The event handler recieves selected item as event argument.
+    </td>
+  </tr>
+
+</tbody>
+</table>
+
+### Using custome templates
+There are four directive for customising autocomplete appearance as follow.
+
+```html
+<ngx-autocomplete [searchMethod]="searchMethod" viewKey="email">
+  <!-- template shows in search result pop-up header -->
+  <ng-template ngxSuggestionHeader>
+      <h3>Employees</h3>
+  </ng-template>
+
+  <!-- template shows for every item in search result pop-up  -->
+  <ng-template let-item ngxSuggestionContent>
+      <span>Email Address {{item.emal}}</span>
+  </ng-template>
+
+  <!-- template shows empty search result pop-up  -->
+    <ng-template ngxNoSuggestion>
+      <span>search resolt is empty !!!</span>
+  </ng-template>
+
+  <!-- template shows for search result pop-up footer  -->
+  <ng-template ngxSuggestionFooter>
+      <span>Here is the footer</span>
+  </ng-template>
+
+</ngx-autocomplete>
+```
+## License
+
+NgIndigit is free and licensed under the [MIT License](./LICENSE).
