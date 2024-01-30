@@ -1,0 +1,41 @@
+name: release-publish
+on:
+  push:
+    branches:
+             - main
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+   release-please:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: google-github-actions/release-please-action@v3
+          id: release
+          with:
+            release-type: node
+            package-name: 'gt-act-x'
+            changelog-types: '[{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Bug Fixes","hidden":false},{"type":"perf","section":"Performance Improvements","hidden":false},{"type":"demo-app","section":"Demo Application Updates","hidden":false},{"type":"docs","section":"Documentation Updates","hidden":false},{"type":"refactor","hidden":true},{"type":"chore","hidden":true},{"type":"ci","hidden":true},{"type":"build","hidden":true},{"type":"test","hidden":true}]'
+        - uses: actions/setup-node@v3
+          with:
+            node-version: 16
+            registry-url: 'https://registry.npmjs.org'
+          if: ${{ steps.release.outputs.release_created }}
+        - run: npm i
+          if: ${{ steps.release.outputs.release_created }}
+        - run: npm run build
+          if: ${{ steps.release.outputs.release_created }}
+        - run: |
+            npm version v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}
+            npm i --package-lock-only
+          working-directory: ./dist/angular-ngx-autocomplete
+          if: ${{ steps.release.outputs.release_created }}
+        - run: npm ci
+          working-directory: ./dist/angular-ngx-autocomplete
+          if: ${{ steps.release.outputs.release_created }}
+        - run: npm publish --access public
+          working-directory: ./dist/angular-ngx-autocomplete
+          env:
+            NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          if: ${{ steps.release.outputs.release_created }}
