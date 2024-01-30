@@ -1,5 +1,5 @@
 {
-  "name": "angular-ngx-autocomplete",
+  "name": "@hosal/ngx-autocomplete",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
