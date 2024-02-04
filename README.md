@@ -9,6 +9,15 @@ Install npm module.
 ```bash
 npm i ngx-autocomplete
 ```
+
+## Dependencies
+
+This package relies on the following peer dependencies:
+
+- **@angular/cdk**: ^12.0.0
+
+Please make sure to install them in your project before using this package.
+
 Now import the module in your angular module, e.g. ``app.module.ts``:
 
 ```ts
@@ -26,7 +35,7 @@ import { AutocompleteModule } from 'ngx-autocomplete';
 })
 export class AppModule {}
 ```
-In your template file, add the ``ng-indigit`` attribute to an HTML text input, e.g.:
+In your template file, add the ``ngx-autocomplete`` tag to use component, e.g.:
 
 ```html
 <ngx-autocomplete [searchMethod]="searchMethod" viewKey="email"></ngx-autocomplete>
@@ -240,7 +249,7 @@ There are four directive for customising autocomplete appearance as follow.
 
   <!-- template shows empty search result pop-up  -->
     <ng-template ngxNoSuggestion>
-      <span>search resolt is empty !!!</span>
+      <span>search result is empty !!!</span>
   </ng-template>
 
   <!-- template shows for search result pop-up footer  -->
@@ -252,4 +261,4 @@ There are four directive for customising autocomplete appearance as follow.
 ```
 ## License
 
-NgIndigit is free and licensed under the [MIT License](./LICENSE).
+@salmanian_hossein/ngx-autocomplete is free and licensed under the [MIT License](./LICENSE).
