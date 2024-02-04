@@ -2,13 +2,15 @@
   "name": "@salmanian_hossein/ngx-autocomplete",
   "version": "1.0.0",
   "license":"MIT",
+  "description": "Requires @angular/cdk as a peer dependency.",
   "author": {
     "name": "Hossein Salmanian",
     "url": "https://hosseinsalmanian.github.io"
   },
   "peerDependencies": {
     "@angular/common": "^15.2.0",
-    "@angular/core": "^15.2.0"
+    "@angular/core": "^15.2.0",
+    "@angular/cdk" : "^15.2.9"
   },
   "dependencies": {
     "tslib": "^2.3.0"
