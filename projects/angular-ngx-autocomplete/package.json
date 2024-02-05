@@ -1,6 +1,6 @@
 {
   "name": "@salmanian_hossein/ngx-autocomplete",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "license": "MIT",
   "description": "Requires @angular/cdk as a peer dependency.",
   "author": {
